@@ -27,7 +27,7 @@ bfs used g u = u : (adjacent g u >>= \v -> guard (notElem v used) >> bfs (u : us
 
 -- checking whether Node is reachable from the first node for every [(Node, _)]
 isConnected :: Graph -> Bool
-isConnected g@((node, _) : _) = null $ filter (not . (flip elem) xs) (map fst g) where
+isConnected g@((node, _) : _) = null $ filter (flip notElem xs) (map fst g) where
                                 xs = bfs [] g node
 
 -- Second task
