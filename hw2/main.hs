@@ -1,5 +1,17 @@
 module Main where
 
+-- first task
+-- 1a)
+type Graph = [(Int, [Int])]
+
+hasElem :: Int -> Maybe [Int] -> Bool
+hasElem src (Just xs) = elem src xs
+hasElem _ _ = False
+
+-- check that graph is not oriented
+isCorrect :: Graph -> Bool
+isCorrect xs = and [hasElem src (lookup dst xs) | (src, ys) <- xs, dst <- ys]
+
 -- Second task
 type Relation a = ((a, a) -> Bool)
 type RelationProperty a = [a] -> Relation a -> Bool
