@@ -1,5 +1,7 @@
 module Main where
 
+import Control.Monad
+
 -- first task
 -- 1a)
 type Graph = [(Int, [Int])]
@@ -11,6 +13,22 @@ hasElem _ _ = False
 -- check that graph is not oriented
 isCorrect :: Graph -> Bool
 isCorrect xs = and [hasElem src (lookup dst xs) | (src, ys) <- xs, dst <- ys]
+
+-- 1b)
+-- all adjacent nodes
+adjacent :: Graph -> Int -> [Int]
+adjacent g node = case (lookup node g) of
+                        Just xs -> xs
+                        Nothing -> []
+
+-- find all reachable nodes
+bfs :: [Int] -> Graph -> Int -> [Int]
+bfs used g u = u : (adjacent g u >>= \v -> guard (notElem v used) >> bfs (u : used) g v)
+
+-- checking whether Node is reachable from the first node for every [(Node, _)]
+isConnected :: Graph -> Bool
+isConnected g@((node, _) : _) = null $ filter (not . (flip elem) xs) (map fst g) where
+                                xs = bfs [] g node
 
 -- Second task
 type Relation a = ((a, a) -> Bool)
