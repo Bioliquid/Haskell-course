@@ -18,7 +18,8 @@ instance MyModulus (a, b) where
 
 data IntPara = Point Int Int
 
+-- as option: on (+) abs x y
 instance MyModulus IntPara where
-    modl (Point x y) = on (+) abs x y
+    modl (Point x y) = on (+) modl x y
 
 main = print . modl $ Point 3 4
