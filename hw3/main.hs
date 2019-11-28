@@ -3,6 +3,7 @@ module Main where
 -- Larionov Nikita R3496
 
 import Data.List
+import Data.Char (intToDigit)
 
 -- first task
 spigot :: Integral a => a -> a -> a -> a -> a -> a -> [a]
@@ -38,5 +39,3 @@ merge = mergeBy compare
 -- Integer is Ord so nub is linear
 getNth :: Int -> Integer
 getNth = (!!) . nub $ merge factorials $ merge squares cubes
-
-main = print $ getNth 5
